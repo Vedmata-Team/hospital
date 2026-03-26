@@ -4,11 +4,7 @@ import { X, User } from 'lucide-react'
 
 const roles = ['Hospital Owner', 'Hospital Admin', 'Doctor', 'Clinic Owner', 'Just Exploring']
 
-function encode(data: Record<string, string>) {
-  return Object.keys(data)
-    .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(data[k]))
-    .join('&')
-}
+
 
 export default function LeadCaptureModal() {
   const [show, setShow] = useState(false)
@@ -36,16 +32,16 @@ export default function LeadCaptureModal() {
     setLoading(true)
 
     try {
-      // Submit to Netlify Forms
+      const formData = new FormData()
+      formData.append('form-name', 'medicare-leads')
+      formData.append('name', name)
+      formData.append('mobile', mobile)
+      formData.append('role', role || 'Not selected')
+
       await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: encode({
-          'form-name': 'medicare-leads',
-          name,
-          mobile,
-          role: role || 'Not selected',
-        }),
+        body: new URLSearchParams(formData as any).toString(),
       })
 
       // Save to localStorage as backup
@@ -53,10 +49,6 @@ export default function LeadCaptureModal() {
       leads.push({ name, mobile, role, time: new Date().toISOString() })
       localStorage.setItem('medicare_leads', JSON.stringify(leads))
       localStorage.setItem('medicare_lead_captured', '1')
-
-      // WhatsApp ping to you
-      const msg = `🏥 *New Lead — MediCare Demo*%0A%0A👤 *Name:* ${encodeURIComponent(name)}%0A📞 *Mobile:* ${mobile}%0A🏷️ *Role:* ${encodeURIComponent(role || 'Not selected')}%0A🕐 *Time:* ${encodeURIComponent(new Date().toLocaleString('en-IN'))}`
-      window.open(`https://wa.me/919506933715?text=${msg}`, '_blank')
 
       setSubmitted(true)
       setTimeout(() => setShow(false), 3000)
