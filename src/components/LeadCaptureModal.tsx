@@ -10,6 +10,7 @@ export default function LeadCaptureModal() {
   const [show, setShow] = useState(false)
   const [name, setName] = useState('')
   const [mobile, setMobile] = useState('')
+  const [clinic, setClinic] = useState('')
   const [role, setRole] = useState('')
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -36,6 +37,7 @@ export default function LeadCaptureModal() {
       formData.append('form-name', 'medicare-leads')
       formData.append('name', name)
       formData.append('mobile', mobile)
+      formData.append('clinic', clinic)
       formData.append('role', role || 'Not selected')
 
       await fetch('/', {
@@ -46,7 +48,7 @@ export default function LeadCaptureModal() {
 
       // Save to localStorage as backup
       const leads = JSON.parse(localStorage.getItem('medicare_leads') || '[]')
-      leads.push({ name, mobile, role, time: new Date().toISOString() })
+      leads.push({ name, mobile, clinic, role, time: new Date().toISOString() })
       localStorage.setItem('medicare_leads', JSON.stringify(leads))
       localStorage.setItem('medicare_lead_captured', '1')
 
@@ -105,6 +107,18 @@ export default function LeadCaptureModal() {
                   value={name}
                   onChange={e => setName(e.target.value)}
                   required
+                  className="w-full pl-9 pr-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
+                />
+              </div>
+
+              <div className="relative">
+                <User size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                <input
+                  type="text"
+                  name="clinic"
+                  placeholder="Clinic / Hospital Name"
+                  value={clinic}
+                  onChange={e => setClinic(e.target.value)}
                   className="w-full pl-9 pr-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
                 />
               </div>
