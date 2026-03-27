@@ -33,8 +33,68 @@ const roles = [
   { role: 'Admin', icon: '🏥', desc: 'Run your hospital', href: '/login?role=admin', color: 'from-emerald-50 to-emerald-100 border-emerald-200' },
 ]
 
+const phoneScreens = [
+  {
+    role: 'Doctor Dashboard',
+    icon: '👨‍⚕️',
+    gradient: 'from-blue-600 to-violet-600',
+    greeting: 'Good Morning, Dr. Arjun 👋',
+    stats: [{ bg: 'bg-blue-600', label: 'Today', value: '12', sub: 'Appointments' }, { bg: 'bg-emerald-500', label: 'Patients', value: '980', sub: 'Total' }],
+    list: { title: 'TODAY\'S PATIENTS', items: [{ name: 'Ananya Singh', time: '10:00 AM', status: 'bg-green-100 text-green-700', label: 'Now' }, { name: 'Rohan Kumar', time: '11:30 AM', status: 'bg-amber-100 text-amber-700', label: 'Pending' }, { name: 'Meera Patel', time: '12:00 PM', status: 'bg-blue-100 text-blue-700', label: 'Confirmed' }] },
+    message: '"Doctor, chest pain since yesterday..."',
+    nav: ['🏠', '📅', '💬', '👥'],
+    activeNav: 0,
+  },
+  {
+    role: 'Patient Dashboard',
+    icon: '🤝',
+    gradient: 'from-emerald-500 to-teal-600',
+    greeting: 'Hello, Priya! 😊',
+    stats: [{ bg: 'bg-emerald-500', label: 'Next Appt', value: 'Today', sub: '3:00 PM' }, { bg: 'bg-blue-500', label: 'Reports', value: '5', sub: 'Available' }],
+    list: { title: 'MY APPOINTMENTS', items: [{ name: 'Dr. Arjun Sharma', time: '3:00 PM', status: 'bg-green-100 text-green-700', label: 'Today' }, { name: 'Dr. Meena Rao', time: 'Tomorrow', status: 'bg-blue-100 text-blue-700', label: 'Upcoming' }, { name: 'Dr. Vikram Das', time: 'Fri 10AM', status: 'bg-slate-100 text-slate-600', label: 'Scheduled' }] },
+    message: '"Your prescription is ready to download"',
+    nav: ['🏠', '📅', '💊', '👤'],
+    activeNav: 0,
+  },
+  {
+    role: 'Admin Dashboard',
+    icon: '🏥',
+    gradient: 'from-orange-500 to-pink-600',
+    greeting: 'Good Morning, Admin 📊',
+    stats: [{ bg: 'bg-orange-500', label: 'Revenue', value: '₹2.4L', sub: 'This Month' }, { bg: 'bg-pink-500', label: 'Doctors', value: '24', sub: 'Active' }],
+    list: { title: 'TODAY\'S OVERVIEW', items: [{ name: 'OPD Patients', time: 'Today', status: 'bg-orange-100 text-orange-700', label: '142' }, { name: 'Surgeries', time: 'Scheduled', status: 'bg-red-100 text-red-700', label: '3' }, { name: 'Bed Occupancy', time: 'Current', status: 'bg-green-100 text-green-700', label: '87%' }] },
+    message: '"New doctor registration request pending"',
+    nav: ['🏠', '👥', '📊', '⚙️'],
+    activeNav: 0,
+  },
+  {
+    role: 'Appointments',
+    icon: '📅',
+    gradient: 'from-violet-600 to-indigo-700',
+    greeting: 'Upcoming Schedule 📅',
+    stats: [{ bg: 'bg-violet-600', label: 'Booked', value: '38', sub: 'This Week' }, { bg: 'bg-indigo-500', label: 'Completed', value: '21', sub: 'This Week' }],
+    list: { title: 'NEXT APPOINTMENTS', items: [{ name: 'Suresh Nair', time: '2:00 PM', status: 'bg-violet-100 text-violet-700', label: 'Cardio' }, { name: 'Kavya Reddy', time: '2:30 PM', status: 'bg-indigo-100 text-indigo-700', label: 'Ortho' }, { name: 'Amit Joshi', time: '3:00 PM', status: 'bg-blue-100 text-blue-700', label: 'General' }] },
+    message: '"Slot confirmed for Dr. Sharma at 4PM"',
+    nav: ['🏠', '📅', '💬', '👥'],
+    activeNav: 1,
+  },
+]
+
 export default function LandingPage() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [screenIdx, setScreenIdx] = useState(0)
+  const [fading, setFading] = useState(false)
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setFading(true)
+      setTimeout(() => {
+        setScreenIdx(i => (i + 1) % phoneScreens.length)
+        setFading(false)
+      }, 400)
+    }, 3000)
+    return () => clearInterval(interval)
+  }, [])
 
   return (
     <div className="min-h-screen bg-white">
