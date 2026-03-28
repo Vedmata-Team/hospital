@@ -112,7 +112,6 @@ export default function LandingPage() {
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-5 text-sm font-medium text-slate-600">
             <a href="#features" className="hover:text-blue-600 transition-colors">Features</a>
-            <a href="#pricing" className="hover:text-blue-600 transition-colors">Pricing</a>
             <a href="#testimonials" className="hover:text-blue-600 transition-colors">Reviews</a>
             <a href="#contact" className="hover:text-blue-600 transition-colors">Contact</a>
             <Link href="/login" className="btn-outline py-1.5 px-4 text-sm">Log In</Link>
@@ -386,23 +385,19 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Features — alternating left/right */}
+      {/* Features */}
       <section id="features" className="py-12 px-4 bg-slate-50">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-10">
+          <div className="text-center mb-8">
             <div className="inline-flex items-center gap-1.5 bg-blue-50 text-blue-600 rounded-full px-3 py-1 text-xs font-bold mb-2">Features</div>
             <h2 className="text-2xl md:text-3xl font-black text-slate-900">Everything Your Hospital Needs</h2>
           </div>
-          <div className="space-y-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {features.map((f, i) => (
-              <div key={i} className={`flex flex-col md:flex-row items-center gap-6 bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-all ${i % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
-                <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-50 to-violet-100 flex items-center justify-center text-4xl shadow-inner">
-                  {f.icon}
-                </div>
-                <div className={`flex-1 text-center ${i % 2 !== 0 ? 'md:text-right' : 'md:text-left'}`}>
-                  <h3 className="font-black text-slate-900 text-base mb-1">{f.title}</h3>
-                  <p className="text-slate-500 text-sm leading-relaxed">{f.desc}</p>
-                </div>
+              <div key={i} className="bg-white rounded-2xl p-4 shadow-sm hover:shadow-md transition-all">
+                <div className="text-2xl mb-2">{f.icon}</div>
+                <h3 className="font-bold text-slate-900 text-sm mb-1">{f.title}</h3>
+                <p className="text-slate-500 text-xs leading-relaxed">{f.desc}</p>
               </div>
             ))}
           </div>
@@ -440,83 +435,39 @@ export default function LandingPage() {
       </section>
 
       {/* Pricing */}
-      <section id="pricing" className="py-16 px-4 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-10">
-            <div className="inline-flex items-center gap-1.5 bg-blue-50 text-blue-600 rounded-full px-3 py-1 text-xs font-bold mb-3">💎 Flexible Pricing</div>
-            <h2 className="text-2xl md:text-4xl font-black text-slate-900">Flexible Plans for Every Stage of Your Institute's Growth</h2>
-            <p className="text-slate-500 mt-2 text-sm md:text-base">Choose a plan that scales with your patients, doctors, and ambitions.</p>
+      <section className="py-12 px-4 bg-slate-50">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center gap-1.5 bg-green-50 text-green-600 rounded-full px-3 py-1 text-xs font-bold mb-2">💰 Simple Pricing</div>
+            <h2 className="text-2xl md:text-3xl font-black text-slate-900">No Hidden Charges. Ever.</h2>
+            <p className="text-slate-500 mt-1 text-sm">One-time setup. You own it forever.</p>
           </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid md:grid-cols-3 gap-4">
             {[
-              {
-                name: 'Starter', badge: '', monthly: '₹999', yearly: '₹10,000',
-                tagline: 'Built for emerging clinics aiming for structured growth.',
-                accent: 'from-blue-500 to-blue-700', border: 'border-blue-100',
-                btnLabel: 'Start Free Trial', btnStyle: 'bg-blue-600 text-white hover:bg-blue-700',
-                waBtnStyle: 'border-blue-300 text-blue-600 hover:bg-blue-50',
-                features: ['Up to 300 patients', 'Up to 5 doctor accounts', 'Smart appointment system', 'WhatsApp & SMS alerts', 'Performance dashboard', 'Email support'],
-              },
-              {
-                name: 'Growth', badge: '🔥 Most Popular', monthly: '₹2,999', yearly: '₹30,000',
-                tagline: 'Designed for clinics scaling their medical operations.',
-                accent: 'from-violet-500 to-purple-700', border: 'border-violet-400 ring-2 ring-violet-400',
-                btnLabel: 'Get Started', btnStyle: 'bg-violet-600 text-white hover:bg-violet-700',
-                waBtnStyle: 'border-violet-300 text-violet-600 hover:bg-violet-50',
-                features: ['Up to 800 patients', 'Up to 15 doctor accounts', 'Video consultations', 'Advanced analytics', 'Prescription management', 'Automation tools'],
-              },
-              {
-                name: 'Pro', badge: '', monthly: '₹4,999', yearly: '₹50,000',
-                tagline: 'For high-performance hospitals focused on results.',
-                accent: 'from-amber-500 to-orange-600', border: 'border-amber-100',
-                btnLabel: 'Upgrade Now', btnStyle: 'bg-amber-500 text-white hover:bg-amber-600',
-                waBtnStyle: 'border-amber-300 text-amber-600 hover:bg-amber-50',
-                features: ['Up to 2000 patients', 'Up to 40 doctor accounts', 'Full automation suite', 'Doctor performance tracking', 'CRM & lead management', 'Priority support'],
-              },
-              {
-                name: 'Enterprise', badge: '', monthly: '₹6,999', yearly: '₹70,000',
-                tagline: 'A complete digital infrastructure for multi-branch hospitals.',
-                accent: 'from-rose-500 to-red-700', border: 'border-rose-100',
-                btnLabel: 'Book a Demo', btnStyle: 'bg-rose-600 text-white hover:bg-rose-700',
-                waBtnStyle: 'border-rose-300 text-rose-600 hover:bg-rose-50',
-                features: ['Unlimited patients & doctors', 'Multi-branch management', 'Custom branding', 'API integrations', 'Dedicated account manager', 'Advanced reporting'],
-              },
+              { name: 'Starter', price: '₹9,999', desc: 'Perfect for small clinics', features: ['Patient management', 'Appointment booking', 'Doctor dashboard', 'WhatsApp support'], color: 'border-slate-200', badge: '' },
+              { name: 'Pro', price: '₹19,999', desc: 'Most popular for hospitals', features: ['Everything in Starter', 'Video consultations', 'Analytics & reports', 'Custom branding', 'Priority support'], color: 'border-blue-500 ring-2 ring-blue-500', badge: '🔥 Most Popular' },
+              { name: 'Enterprise', price: 'Custom', desc: 'For large hospital chains', features: ['Everything in Pro', 'Multi-branch support', 'Custom integrations', 'Dedicated developer', 'SLA guarantee'], color: 'border-slate-200', badge: '' },
             ].map((plan, i) => (
-              <div key={i} className={`relative bg-white rounded-2xl border-2 ${plan.border} p-5 flex flex-col shadow-sm hover:shadow-lg transition-all`}>
+              <div key={i} className={`bg-white rounded-2xl p-5 border-2 ${plan.color} relative`}>
                 {plan.badge && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-violet-600 text-white text-[10px] font-black px-3 py-1 rounded-full whitespace-nowrap">{plan.badge}</div>
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-[10px] font-black px-3 py-1 rounded-full whitespace-nowrap">{plan.badge}</div>
                 )}
-                {/* Header */}
-                <div className={`bg-gradient-to-r ${plan.accent} rounded-xl px-4 py-3 mb-4`}>
-                  <div className="text-white/80 text-xs font-semibold">{plan.name}</div>
-                  <div className="text-white text-2xl font-black">{plan.monthly}<span className="text-sm font-medium opacity-70"> /mo</span></div>
-                  <div className="text-white/70 text-[11px] mt-0.5">{plan.yearly} / year</div>
-                </div>
-                <p className="text-slate-500 text-xs mb-4 leading-relaxed">{plan.tagline}</p>
-                <div className="space-y-2 mb-5 flex-1">
+                <div className="text-sm font-bold text-slate-500 mb-1">{plan.name}</div>
+                <div className="text-3xl font-black text-slate-900 mb-1">{plan.price}</div>
+                <div className="text-xs text-slate-400 mb-4">{plan.desc}</div>
+                <div className="space-y-2 mb-5">
                   {plan.features.map(f => (
                     <div key={f} className="flex items-center gap-2 text-xs text-slate-600">
-                      <Check size={12} className="text-green-500 flex-shrink-0" />{f}
+                      <Check size={13} className="text-green-500 flex-shrink-0" />{f}
                     </div>
                   ))}
                 </div>
-                {/* CTA button */}
-                <a href="tel:+919506933715" className={`block text-center py-2.5 rounded-xl text-sm font-bold transition-all mb-2 ${plan.btnStyle}`}>
-                  {plan.btnLabel}
-                </a>
-                {/* WhatsApp button */}
-                <a
-                  href={`https://wa.me/919506933715?text=${encodeURIComponent(`Hi! I'm interested in the *${plan.name}* plan (${plan.monthly}/mo) for MediCare Pro. Please share more details.`)}`}
-                  target="_blank" rel="noopener noreferrer"
-                  className={`flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-bold border-2 transition-all ${plan.waBtnStyle}`}>
-                  <MessageCircle size={13} /> WhatsApp
-                </a>
+                <a href="tel:+919506933715" className={`block text-center py-2.5 rounded-xl text-sm font-bold transition-all ${
+                  i === 1 ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                }`}>Book Free Demo</a>
               </div>
             ))}
           </div>
-
-          <p className="text-center text-slate-400 text-xs mt-6">No setup fees. No hidden charges. Upgrade anytime as you grow.</p>
         </div>
       </section>
 
