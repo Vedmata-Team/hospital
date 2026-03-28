@@ -64,7 +64,7 @@ export default function LeadCaptureModal() {
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
-      <div className="bg-white rounded-3xl shadow-2xl w-full max-w-sm p-6 relative animate-slide-up">
+      <div className="bg-white rounded-3xl shadow-2xl w-full max-w-sm p-4 relative animate-slide-up">
         <button
           onClick={() => { setShow(false); localStorage.setItem('medicare_lead_captured', '1') }}
           className="absolute top-4 right-4 p-1.5 rounded-full bg-slate-100 hover:bg-slate-200 transition-colors"
@@ -74,16 +74,12 @@ export default function LeadCaptureModal() {
 
         {!submitted ? (
           <>
-            <div className="text-center mb-5">
-              <div className="text-4xl mb-3">🏥</div>
-              <h2 className="text-xl font-black text-slate-900 leading-snug">
-                Kya aapka bhi hospital hai? 🙏
+            <div className="text-center mb-4">
+              <h2 className="text-lg font-black text-slate-900 leading-snug">
+                🏥 Kya aapka bhi hospital hai? 🙏
               </h2>
-              <p className="text-slate-500 text-sm mt-2 leading-relaxed">
-                Aap jo demo dekh rahe hain —{' '}
-                <span className="font-semibold text-slate-700">exactly aisa hi software</span>{' '}
-                aapke hospital ke liye bhi ban sakta hai.<br />
-                <span className="text-blue-600 font-semibold">Apna naam aur number chhod jaiye</span> — hum aapse baat karenge. 🤝
+              <p className="text-slate-500 text-xs mt-1">
+                <span className="text-blue-600 font-semibold">Naam aur number chhod jaiye</span> — hum call karenge. 🤝
               </p>
             </div>
 
@@ -107,7 +103,7 @@ export default function LeadCaptureModal() {
                   value={name}
                   onChange={e => setName(e.target.value)}
                   required
-                  className="w-full pl-9 pr-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
+                  className="w-full pl-9 pr-4 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
                 />
               </div>
 
@@ -119,7 +115,7 @@ export default function LeadCaptureModal() {
                   placeholder="Clinic / Hospital Name"
                   value={clinic}
                   onChange={e => setClinic(e.target.value)}
-                  className="w-full pl-9 pr-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
+                  className="w-full pl-9 pr-4 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
                 />
               </div>
 
@@ -132,7 +128,7 @@ export default function LeadCaptureModal() {
                   value={mobile}
                   onChange={e => { setMobile(e.target.value.replace(/\D/g, '').slice(0, 10)); setError('') }}
                   required
-                  className="w-full pl-12 pr-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
+                  className="w-full pl-12 pr-4 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
                 />
               </div>
 
@@ -153,16 +149,12 @@ export default function LeadCaptureModal() {
               {error && <p className="text-red-500 text-xs">{error}</p>}
 
               <button type="submit" disabled={loading}
-                className="btn-primary w-full py-3.5 text-sm font-bold">
-                {loading ? 'Saving...' : '🚀 Haan, Mujhe Chahiye Yeh Software!'}
+                className="btn-primary w-full py-2.5 text-sm font-bold">
+                {loading ? 'Saving...' : '🚀 Haan, Mujhe Chahiye!'}
               </button>
-            </form>
 
-            <div className="mt-4 bg-slate-50 rounded-xl px-4 py-3 text-xs text-slate-500 space-y-1">
-              <div className="flex items-center gap-2"><span>✅</span> Free demo call — koi charge nahi</div>
-              <div className="flex items-center gap-2"><span>✅</span> Aapke hospital ke naam se customize hoga</div>
-              <div className="flex items-center gap-2"><span>✅</span> IITian developer directly aapse baat karega</div>
-            </div>
+              <p className="text-center text-[10px] text-slate-400">✅ Free call &nbsp;·&nbsp; ✅ Custom branding &nbsp;·&nbsp; ✅ IITian developer</p>
+            </form>
           </>
         ) : (
           <div className="text-center py-6">
